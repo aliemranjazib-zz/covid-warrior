@@ -1,8 +1,8 @@
 # covidpk
 
-All information of covid-19 related to pakistan 
-Selft checker test
-Plasma donation Module
+All information of covid-19 related to pakistan,
+,Selft checker test
+and Plasma donation Module
 
 
 # ScreenShots
