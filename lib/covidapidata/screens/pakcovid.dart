@@ -42,12 +42,14 @@ class _PakCovidScreenState extends State<PakCovidScreen> {
                     child: CircularProgressIndicator(),
                   )
                 : Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Flag(),
                       SizedBox(
                         height: 20,
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           HomeTile(
                             caseCount: postMdl.homeStats.cases,
@@ -62,6 +64,7 @@ class _PakCovidScreenState extends State<PakCovidScreen> {
                         ],
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           HomeTile(
                             caseCount: postMdl.homeStats.deaths,
@@ -76,6 +79,7 @@ class _PakCovidScreenState extends State<PakCovidScreen> {
                         ],
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           HomeTile(
                             caseCount: postMdl.homeStats.recovered,
@@ -90,6 +94,7 @@ class _PakCovidScreenState extends State<PakCovidScreen> {
                         ],
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           HomeTile(
                             caseCount: postMdl.homeStats.critical,
@@ -104,6 +109,7 @@ class _PakCovidScreenState extends State<PakCovidScreen> {
                         ],
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           HomeTile(
                             caseCount: postMdl.homeStats.deathsPerOneMillion,

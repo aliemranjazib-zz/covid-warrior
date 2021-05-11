@@ -35,20 +35,13 @@ class _ProvincesScreenState extends State<ProvincesScreen> {
           backgroundColor: Colors.transparent,
           elevation: 0.0,
           title: Text(
-            'Available Plasma',
+            'Federal and Provincial Stats',
             style: TextStyle(color: Colors.black),
           ),
           iconTheme: IconThemeData(color: Colors.green),
         ),
         body: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: Text(
-                "Federal and Provincial Stats",
-                style: style,
-              ),
-            ),
             pmodel.loading
                 ? Center(
                     child: CircularProgressIndicator(),

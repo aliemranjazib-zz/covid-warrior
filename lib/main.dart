@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:covidpk/covidapidata/screens/pakcovid.dart';
 import 'package:covidpk/homescreen/mainpage.dart';
 import 'package:covidpk/plasmadonation.dart/chat_screen.dart';
@@ -14,6 +16,7 @@ import 'covidapidata/providers/apiProvider.dart';
 import 'mapsdata/mapsscreen.dart';
 
 void main() async {
+  HttpOverrides.global = new MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(
@@ -79,5 +82,14 @@ class SplashScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }
