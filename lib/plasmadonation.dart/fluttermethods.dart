@@ -1,6 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+setSearchParam(String caseNumber) {
+  List<String> caseSearchList = List();
+  String temp = "";
+  for (int i = 0; i < caseNumber.length; i++) {
+    temp = temp + caseNumber[i];
+    caseSearchList.add(temp);
+  }
+  return caseSearchList;
+}
+
 Future<bool> mydata(
   String name,
   String blood,
@@ -8,15 +18,22 @@ Future<bool> mydata(
   String phoneNumber,
   String dateofBirth,
   String address,
+  String city,
+  String type,
 ) async {
   final db = FirebaseFirestore.instance;
   db.collection('tasks').add({
     'name': name,
     'bloodgroup': blood,
+    'bloodgroup search': setSearchParam(blood),
     "gender": gender,
+    'gender search': setSearchParam(gender),
     'phoneNumber': phoneNumber,
     'dateofBirth': dateofBirth,
     'address': address,
+    'city': city,
+    'city search': setSearchParam(city),
+    'type': type
   });
   return true;
 }

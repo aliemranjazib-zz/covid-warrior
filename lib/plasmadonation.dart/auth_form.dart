@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AuthForm extends StatefulWidget {
+  static const String routeName = '/loginSignupPage';
+
   AuthForm(
     this.submitFn,
     this.isLoading,

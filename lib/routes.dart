@@ -1,13 +1,15 @@
 import 'package:covidpk/covidapidata/screens/pakcovid.dart';
 import 'package:covidpk/homescreen/mainpage.dart';
 import 'package:covidpk/plasmadonation.dart/PlasmaDonateSreen.dart';
-import 'package:covidpk/plasmadonation.dart/chat_screen.dart';
+import 'package:covidpk/plasmadonation.dart/auth_form.dart';
+import 'package:covidpk/plasmadonation.dart/AllPlasma.dart';
 import 'package:covidpk/provincedata.dart/provinceScreen.dart';
 import 'package:covidpk/selfTest/agreement_screen.dart';
 import 'package:covidpk/selfTest/checkyouCovidScreen.dart';
 import 'mapsdata/mapsscreen.dart';
 
 class Routes {
+  static const String loginSignupPage = AuthForm.routeName;
   static const String mainPage = MainPage.routeName;
   static const String pakCovidPage = PakCovidScreen.routeName;
   static const String mapsPage = MapsScreen.routeName;

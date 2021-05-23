@@ -1,3 +1,4 @@
+import 'package:covidpk/plasmadonation.dart/LoginScreen.dart';
 import 'package:covidpk/routes.dart';
 import 'package:flutter/material.dart';
 
@@ -50,9 +51,12 @@ class AppDrawer extends StatelessWidget {
               onTap: () =>
                   Navigator.pushNamed(context, Routes.agreenmentScreen)),
           _createDrawerItem(
-              icon: Icons.bloodtype_sharp,
-              text: 'Plasma Donation',
-              onTap: () => Navigator.pushNamed(context, Routes.chatPage)),
+            icon: Icons.bloodtype_sharp,
+            text: 'Plasma Donation',
+            onTap: () => Navigator.of(context)
+                .push(MaterialPageRoute(builder: (_) => LoginScreen())),
+          ),
+          // Navigator.pushNamed(context, Routes.loginSignupPage)),
           Divider(),
           ListTile(
             title: Text('0.0.1'),

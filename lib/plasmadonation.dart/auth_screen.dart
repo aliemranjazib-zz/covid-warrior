@@ -1,6 +1,6 @@
 import 'package:covidpk/plasmadonation.dart/auth_form.dart';
 import 'package:covidpk/plasmadonation.dart/blood_form.dart';
-import 'package:covidpk/plasmadonation.dart/chat_screen.dart';
+import 'package:covidpk/plasmadonation.dart/AllPlasma.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -32,10 +32,7 @@ class _AuthScreenState extends State<AuthScreen> {
           email: email,
           password: password,
         );
-        // .whenComplete(() => Navigator.of(context)
-        //     .push(MaterialPageRoute(builder: (_) => BloodForm())));
-        // SharedPreferences prefs = await SharedPreferences.getInstance();
-        // prefs.setString('email', email);
+
         Navigator.of(context)
             .pushReplacement(MaterialPageRoute(builder: (_) => BloodForm()));
       } else {

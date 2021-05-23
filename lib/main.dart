@@ -2,7 +2,11 @@ import 'dart:io';
 
 import 'package:covidpk/covidapidata/screens/pakcovid.dart';
 import 'package:covidpk/homescreen/mainpage.dart';
-import 'package:covidpk/plasmadonation.dart/chat_screen.dart';
+import 'package:covidpk/plasmadonation.dart/LoginScreen.dart';
+import 'package:covidpk/plasmadonation.dart/SignUpScreen.dart';
+import 'package:covidpk/plasmadonation.dart/auth_form.dart';
+import 'package:covidpk/plasmadonation.dart/AllPlasma.dart';
+import 'package:covidpk/plasmadonation.dart/blood_form.dart';
 import 'package:covidpk/provincedata.dart/provinceScreen.dart';
 import 'package:covidpk/routes.dart';
 import 'package:covidpk/selfTest/agreement_screen.dart';
@@ -50,7 +54,7 @@ class MyApp extends StatelessWidget {
                 primarySwatch: Colors.green,
               ),
               //home: ProvincesScreen(),
-              home: MainPage(),
+              home: BloodForm(),
               routes: {
                 Routes.mainPage: (context) => MainPage(),
                 Routes.pakCovidPage: (context) => PakCovidScreen(),

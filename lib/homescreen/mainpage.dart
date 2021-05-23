@@ -5,7 +5,8 @@ import 'package:covidpk/homescreen/TextData.dart';
 import 'package:covidpk/homescreen/counter.dart';
 import 'package:covidpk/homescreen/selfttestwidget.dart';
 import 'package:covidpk/mapsdata/mapsscreen.dart';
-import 'package:covidpk/plasmadonation.dart/chat_screen.dart';
+import 'package:covidpk/plasmadonation.dart/LoginScreen.dart';
+import 'package:covidpk/plasmadonation.dart/AllPlasma.dart';
 import 'package:covidpk/routes.dart';
 import 'package:covidpk/selfTest/checkyouCovidScreen.dart';
 import 'package:covidpk/widget_screens.dart/topic_page_view.dart';
@@ -172,31 +173,23 @@ class _MainPageState extends State<MainPage> {
                                   title: "Self Checker Covid Test",
                                   c: Colors.red,
                                   onpressed: () {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (_) => CheckyourCovidScreen(),
-                                      ),
-                                    );
+                                    Navigator.pushNamed(
+                                        context, Routes.agreenmentScreen);
                                   }),
                               SelftTest(
                                   title: "Donate or Search Plasma",
                                   c: Colors.green,
                                   onpressed: () {
                                     Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (_) => PlasmaUi(),
-                                      ),
-                                    );
+                                        MaterialPageRoute(
+                                            builder: (_) => LoginScreen()));
                                   }),
                               SelftTest(
                                   title: "Covid Vaccination ",
                                   c: Colors.blue,
                                   onpressed: () {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (_) => MapsScreen(),
-                                      ),
-                                    );
+                                    Navigator.pushNamed(
+                                        context, Routes.mapsPage);
                                   }),
                             ],
                           ),

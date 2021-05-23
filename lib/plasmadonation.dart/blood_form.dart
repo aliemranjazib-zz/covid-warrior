@@ -1,12 +1,8 @@
-import 'dart:async';
-import 'dart:ui';
 import 'package:covidpk/drawer/adddrawer.dart';
-import 'package:covidpk/plasmadonation.dart/chat_screen.dart';
+import 'package:covidpk/plasmadonation.dart/AllPlasma.dart';
 import 'package:covidpk/plasmadonation.dart/fluttermethods.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
-import 'package:geocoder/geocoder.dart';
-import 'package:geolocator/geolocator.dart';
 
 class BloodForm extends StatefulWidget {
   @override
@@ -21,43 +17,41 @@ class _BloodFormState extends State<BloodForm> {
   String birthDateInString;
 
   TextEditingController _dateC = TextEditingController();
-  StreamSubscription<Position> _positionStreamSubscription;
-  Position _currentposition;
-  Address _address;
-  String add =
-      'Street No. 2, Sahiwal - ساہیوال, Sahiwal District, Punjab, Pakistan';
+  // StreamSubscription<Position> _positionStreamSubscription;
+  // Position _currentposition;
+  // Address _address;
 
   DateTime datePick = DateTime(1900);
 
   @override
   void initState() {
     super.initState();
-    getCoordinate();
+    //getCoordinate();
   }
 
-  getCoordinate() {
-    _positionStreamSubscription = Geolocator.getPositionStream(
-            desiredAccuracy: LocationAccuracy.high, distanceFilter: 10)
-        .listen((Position position) {
-      setState(() {
-        print(position);
-        _currentposition = position;
+  // getCoordinate() {
+  //   _positionStreamSubscription = Geolocator.getPositionStream(
+  //           desiredAccuracy: LocationAccuracy.high, distanceFilter: 10)
+  //       .listen((Position position) {
+  //     setState(() {
+  //       print(position);
+  //       _currentposition = position;
 
-        final co = Coordinates(position.latitude, position.longitude);
-        toadress(co).then((value) {
-          return _address = value;
-        });
-      });
-    });
-  }
+  //       final co = Coordinates(position.latitude, position.longitude);
+  //       toadress(co).then((value) {
+  //         return _address = value;
+  //       });
+  //     });
+  //   });
+  // }
 
-  Future<Address> toadress(Coordinates co) async {
-    var address = await Geocoder.local.findAddressesFromCoordinates(co);
-    print(address.first.addressLine);
-    print(address.first.countryName);
+  // Future<Address> toadress(Coordinates co) async {
+  //   var address = await Geocoder.local.findAddressesFromCoordinates(co);
+  //   print(address.first.addressLine);
+  //   print(address.first.countryName);
 
-    return address.first;
-  }
+  //   return address.first;
+  // }
 
   final _key = GlobalKey<FormState>();
 
@@ -70,17 +64,8 @@ class _BloodFormState extends State<BloodForm> {
       print(_dateC.text);
       print(bloodGroup);
       print(phoneNumberC.text);
-      //print(_address.addressLine.toString());
-
-      // addData(bloodValue, usernameC.text);
-      mydata(
-        usernameC.text,
-        bloodGroup,
-        genderC.text,
-        phoneNumberC.text,
-        _dateC.text,
-        add,
-      );
+      mydata(usernameC.text, bloodGroup, genderC.text, phoneNumberC.text,
+          _dateC.text, addressC.text, cityC.text, typeC.text);
       Navigator.of(context).push(MaterialPageRoute(builder: (_) => PlasmaUi()));
     }
   }
@@ -93,9 +78,15 @@ class _BloodFormState extends State<BloodForm> {
   TextEditingController usernameC = TextEditingController();
   TextEditingController phoneNumberC = TextEditingController();
   TextEditingController bloodGroupC = TextEditingController();
+  TextEditingController cityC = TextEditingController();
+  TextEditingController addressC = TextEditingController();
+  TextEditingController typeC = TextEditingController();
 
   List<String> blood = ['A+', 'B+', 'A-', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
   String bloodValue = 'A+';
+  List<String> choices = ['donour', 'receiver'];
+  String defaultValue = 'donour';
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -136,6 +127,30 @@ class _BloodFormState extends State<BloodForm> {
                         } else {
                           return null;
                         }
+                      },
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    DropdownButtonFormField(
+                      onSaved: (value) {
+                        typeC.text = value;
+                      },
+                      decoration: InputDecoration(
+                        labelText: "Select Type",
+                        border: OutlineInputBorder(),
+                      ),
+                      hint: Text("sasas"),
+                      value: 'Donor',
+                      elevation: 16,
+                      icon: Icon(Icons.arrow_drop_down_circle),
+                      isExpanded: true,
+                      items: ['Donor', 'Receiver']
+                          .map(
+                              (e) => DropdownMenuItem(value: e, child: Text(e)))
+                          .toList(),
+                      onChanged: (value) {
+                        typeC.text = value;
                       },
                     ),
                     SizedBox(
@@ -232,9 +247,9 @@ class _BloodFormState extends State<BloodForm> {
                             errorInvalidText: 'Enter date in valid range',
                             initialEntryMode: DatePickerEntryMode.input,
                             context: context,
-                            initialDate: new DateTime.now(),
-                            firstDate: new DateTime(1900),
-                            lastDate: new DateTime(2100));
+                            initialDate: new DateTime(2003, 1),
+                            firstDate: new DateTime(1950),
+                            lastDate: new DateTime(2003));
                         if (datePick != null && datePick != birthDate) {
                           setState(() {
                             birthDate = datePick;
@@ -249,33 +264,50 @@ class _BloodFormState extends State<BloodForm> {
                     SizedBox(
                       height: 10,
                     ),
-                    Container(
-                      child: Column(
-                        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            _address != null
-                                ? "${_address.addressLine}"
-                                : "get address ",
-                            maxLines: 2,
-                            textAlign: TextAlign.center,
-                          ),
-                          MaterialButton(
-                            color: Colors.green,
-                            onPressed: () {
-                              getCoordinate();
-                            },
-                            child: Text("get address"),
-                          )
-                        ],
+                    TextFormField(
+                      maxLines: 2,
+                      autofocus: true,
+                      onSaved: (value) {
+                        addressC.text = value;
+                      },
+                      decoration: InputDecoration(
+                        labelText: "Enter your Address",
+                        border: OutlineInputBorder(),
                       ),
+                      validator: (v) {
+                        if (v.isEmpty) {
+                          return "not be empty";
+                        } else {
+                          return null;
+                        }
+                      },
                     ),
                     SizedBox(height: 10),
+                    TextFormField(
+                      autofocus: true,
+                      onSaved: (value) {
+                        cityC.text = value;
+                      },
+                      decoration: InputDecoration(
+                        labelText: "Enter your City",
+                        border: OutlineInputBorder(),
+                      ),
+                      validator: (v) {
+                        if (v.isEmpty) {
+                          return "not be empty";
+                        } else {
+                          return null;
+                        }
+                      },
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
                     Container(
                       width: double.infinity,
                       child: MaterialButton(
                         shape: StadiumBorder(),
-                        color: Colors.indigo,
+                        color: Colors.green,
                         onPressed: () {
                           trySubmit();
                         },
