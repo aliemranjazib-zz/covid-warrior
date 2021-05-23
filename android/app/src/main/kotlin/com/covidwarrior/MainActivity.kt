@@ -1,4 +1,4 @@
-package com.example.covidpk
+package com.covidwarrior
 
 import io.flutter.embedding.android.FlutterActivity
 

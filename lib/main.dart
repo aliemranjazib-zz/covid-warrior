@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
                 primarySwatch: Colors.green,
               ),
               //home: ProvincesScreen(),
-              home: BloodForm(),
+              home: MainPage(),
               routes: {
                 Routes.mainPage: (context) => MainPage(),
                 Routes.pakCovidPage: (context) => PakCovidScreen(),

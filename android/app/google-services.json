@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "149537362707",
-    "project_id": "covidpk-81bd0",
-    "storage_bucket": "covidpk-81bd0.appspot.com"
+    "project_number": "227090244757",
+    "project_id": "covid-warrior-73e53",
+    "storage_bucket": "covid-warrior-73e53.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:149537362707:android:59bcfee2623e62b22fc0e6",
+        "mobilesdk_app_id": "1:227090244757:android:6c4f2dcab2829caba6679c",
         "android_client_info": {
-          "package_name": "com.example.covidpk"
+          "package_name": "com.covidwarrior"
         }
       },
       "oauth_client": [
         {
-          "client_id": "149537362707-q8g1ecv8i2egcs4734gms5cjasgp70ph.apps.googleusercontent.com",
+          "client_id": "227090244757-9i5mvbptmlie99oqenofjj5vrbdbc3bj.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAO3avjUAG7P0ZNUWPnlKFu5b_b8RNV_3I"
+          "current_key": "AIzaSyDIJyC9BrBlORprmawL406xA7O4PPe8kt0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "149537362707-q8g1ecv8i2egcs4734gms5cjasgp70ph.apps.googleusercontent.com",
+              "client_id": "227090244757-9i5mvbptmlie99oqenofjj5vrbdbc3bj.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

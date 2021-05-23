@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:covidpk/drawer/adddrawer.dart';
+import 'package:covidpk/plasmadonation.dart/LoginScreen.dart';
 import 'package:covidpk/plasmadonation.dart/blood_form.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -8,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_open_whatsapp/flutter_open_whatsapp.dart';
+import 'package:age/age.dart';
 
 import 'auth_screen.dart';
 
@@ -62,6 +64,19 @@ class _PlasmaUiState extends State<PlasmaUi> {
 
   String name = "";
 
+  DateTime birthday = DateTime(1990, 1, 20);
+  DateTime today = DateTime.now(); //2020/1/24
+
+  AgeDuration age;
+
+  // Find out your age
+  method() {
+    age = Age.dateDifference(
+        fromDate: birthday, toDate: today, includeToDate: false);
+
+    print('Your age is $age');
+  }
+
   @override
   Widget build(BuildContext context) {
     final textstyle = TextStyle(
@@ -81,11 +96,14 @@ class _PlasmaUiState extends State<PlasmaUi> {
         ),
         iconTheme: IconThemeData(color: Colors.green),
         actions: [
-          IconButton(
-              onPressed: () {
-                FirebaseAuth.instance.signOut();
-              },
-              icon: Icon(Icons.logout))
+          TextButton(
+            onPressed: () {
+              FirebaseAuth.instance.signOut();
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (_) => LoginScreen()));
+            },
+            child: Text('sign out'),
+          )
         ],
       ),
       body: Column(
@@ -102,7 +120,7 @@ class _PlasmaUiState extends State<PlasmaUi> {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30)),
                   prefixIcon: Icon(Icons.search),
-                  hintText: 'Search Plasma by City'),
+                  hintText: 'Search Plasma by Blood Group'),
             ),
           ),
           Expanded(
@@ -110,7 +128,7 @@ class _PlasmaUiState extends State<PlasmaUi> {
               stream: (name != "" && name != null)
                   ? FirebaseFirestore.instance
                       .collection('tasks')
-                      .where('city search', arrayContains: name)
+                      .where('bloodgroup search', arrayContains: name)
                       .snapshots()
                   : FirebaseFirestore.instance.collection('tasks').snapshots(),
               builder: (ctx, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
@@ -140,20 +158,38 @@ class _PlasmaUiState extends State<PlasmaUi> {
                                   // mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Container(
-                                      alignment: Alignment.center,
-                                      decoration: BoxDecoration(
-                                        color: Colors.red,
-                                        borderRadius: BorderRadius.circular(
-                                          20,
+                                    Column(
+                                      children: [
+                                        Container(
+                                          alignment: Alignment.center,
+                                          decoration: BoxDecoration(
+                                            color: Colors.red,
+                                            borderRadius: BorderRadius.circular(
+                                              20,
+                                            ),
+                                          ),
+                                          width: 100,
+                                          height: 100,
+                                          child: Text(
+                                            '${e.data()['bloodgroup'].toString()}',
+                                            style: textstyle,
+                                          ),
                                         ),
-                                      ),
-                                      width: 100,
-                                      height: 100,
-                                      child: Text(
-                                        '${e.data()['bloodgroup'].toString()}',
-                                        style: textstyle,
-                                      ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Container(
+                                          color: Colors.green,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Text(
+                                              '${e.data()['type'].toString()}',
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                          ),
+                                        )
+                                      ],
                                     ),
                                     SizedBox(width: 30),
                                     Expanded(
@@ -169,6 +205,11 @@ class _PlasmaUiState extends State<PlasmaUi> {
                                           ),
                                           Text(
                                             'Gender : ${e.data()['gender']}',
+                                            style:
+                                                TextStyle(color: Colors.grey),
+                                          ),
+                                          Text(
+                                            'Date of Birth : ${e.data()['dateofBirth']}',
                                             style:
                                                 TextStyle(color: Colors.grey),
                                           ),
@@ -223,8 +264,8 @@ class _PlasmaUiState extends State<PlasmaUi> {
                                                               "+92${e.data()['phoneNumber']}",
                                                               "Hi Sir, I am looking for plasma. You have posted in plasma donation app as a donour. Kindly Help me Thankyou Sir");
                                                     },
-                                                    icon:
-                                                        Icon(Icons.call_sharp),
+                                                    icon: Image.asset(
+                                                        'assets/wap.png'),
                                                     color: Colors.green,
                                                   ),
                                                 ],
